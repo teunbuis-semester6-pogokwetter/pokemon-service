@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  pokemon-service:
+    container_name: pokemon-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks:
+      - spring-net
+    restart: "no"
+    depends_on:
+      - pokemon-mysql
+    image: pokemon-service:latest
+    ports:
+      - 8080:8080
+
+  pokemon-mysql:
+    container_name: pokemon-mysql
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    networks:
+      - spring-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=Teun
+      - MYSQL_DATABASE=pokemon
+    volumes:
+      - pokemondata:/var/lib/mysql
+      - pokemondata:/etc/mysql/conf.d
+
+networks:
+  spring-net:
+    name: spring-net
+    driver: bridge
+
+volumes:
+  pokemondata:

@@ -1,4 +1,4 @@
-package com.teun.pokemon.DTO;
+package com.teun.pokemonservice.DTO;
 
 public class PokemonDTO {
 }
