@@ -49,4 +49,4 @@ jobs:
 
     - name: Push Pokemon-Service Image
       working-directory: ./
-      run: docker push ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter/pokemon-service:lates
+      run: docker push ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter/pokemon-service:latest
