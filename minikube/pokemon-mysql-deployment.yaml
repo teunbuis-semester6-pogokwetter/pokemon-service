@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pokemon-mysql
+  name: pokemon-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: pokemon-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/spring-net: "true"
+        io.kompose.service: pokemon-mysql
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: pokemon
+            - name: MYSQL_ROOT_PASSWORD
+              value: Teun
+          image: mysql:latest
+          name: pokemon-db
+          ports:
+            - containerPort: 3306
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: pokemondata
+            - mountPath: /etc/mysql/conf.d
+              name: pokemondata
+      restartPolicy: Always
+      volumes:
+        - name: pokemondata
+          persistentVolumeClaim:
+            claimName: pokemondata
+status: {}
