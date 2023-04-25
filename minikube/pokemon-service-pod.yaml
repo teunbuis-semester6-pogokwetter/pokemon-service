@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yml
     kompose.version: 1.28.0 (c4137012e)
   creationTimestamp: null
   labels:
@@ -11,7 +11,7 @@ metadata:
   name: pokemon-service
 spec:
   containers:
-    - image: teunbuis/pogokwetter:pokemon-service
+    - image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
       name: pokemon-service
       ports:
         - containerPort: 8080
