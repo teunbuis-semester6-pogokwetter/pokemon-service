@@ -18,10 +18,10 @@ public class PokemonController {
     @Autowired
     PokemonService service;
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity<Pokemon> getPokemonById(@PathVariable(value = "id")int id){
+    @GetMapping("/dex/{dexNumber}")
+    public ResponseEntity<Pokemon> getPokemonById(@PathVariable(value = "dexNumber")Long dexNumber){
         try{
-            Pokemon pokemon = service.findPokemonById(id);
+            Pokemon pokemon = service.findPokemonByDexNumber(dexNumber);
             if(pokemon != null){
                 return ResponseEntity.ok().body(pokemon);
             }

@@ -13,8 +13,8 @@ public class PokemonService {
     @Autowired
     PokemonRepo repo;
 
-    public Pokemon findPokemonById(int id){
-        return repo.findById(id).orElse(null);
+    public Pokemon findPokemonByDexNumber(long dexNumber){
+        return repo.findByDexNumber(dexNumber).orElse(null);
     }
     public Pokemon findPokemonByName(String name){
         return repo.findByName(name).orElse(null);
