@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/pokemonimg")
@@ -36,7 +36,7 @@ public class PokemonImgcontroller {
     @GetMapping("/id/{id}")
     public ResponseEntity<byte[]> getPkmnImgById(@PathVariable(value = "id") int id){
         try{
-            PokemonImg pokemonImg = service.findPokemonImgById(id);
+            PokemonImg pokemonImg = service.findByPokemonId(id);
             if(pokemonImg != null){
                 byte[] image = pokemonImg.getPokemonpicture();
                 return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(image);
@@ -52,7 +52,6 @@ public class PokemonImgcontroller {
 
     @PostMapping
     public ResponseEntity<Integer> uploadPkmnImg(@RequestParam MultipartFile multipartImage){
-
         try{
             PokemonImg pokemonImg =new PokemonImg();
             pokemonImg.setPokemonid(1);
@@ -63,7 +62,16 @@ public class PokemonImgcontroller {
         catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
-
+    }
+    @PostMapping("/upload")
+    public ResponseEntity<String> handleFilesUpload(@RequestParam("file") MultipartFile[] images){
+        try{
+            service.savePokemonImgs(images);
+            return ResponseEntity.ok().body("Success");
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().body(e.toString());
+        }
     }
 
 }
