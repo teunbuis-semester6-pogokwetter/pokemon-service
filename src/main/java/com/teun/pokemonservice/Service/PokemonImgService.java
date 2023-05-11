@@ -70,14 +70,13 @@ public class PokemonImgService {
     }
     private int getPokemonIdFromFileName(String fileName){
         int pokemonId;
-        fileName.replaceAll(".png", "");
-        StringBuilder sb = new StringBuilder(fileName);
+        String clean = fileName.replaceAll(".png", "");
+        StringBuilder sb = new StringBuilder(clean);
         while(sb.charAt(0) =='0'){
             sb.deleteCharAt(0);
         }
         try{
             pokemonId = Integer.parseInt(sb.toString());
-
         }
         catch (NumberFormatException e){
             pokemonId = 99999;
