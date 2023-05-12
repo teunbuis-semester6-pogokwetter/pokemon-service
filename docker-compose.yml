@@ -9,13 +9,13 @@ services:
       - pokemon-mysql
     image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
     ports:
-      - 8080:8080
+      - "8080:8080"
 
   pokemon-mysql:
     container_name: pokemon-mysql
     image: mysql:latest
     ports:
-      - 3306:3306
+      - "306:3306"
     networks:
       - spring-net
     environment:
@@ -24,6 +24,19 @@ services:
     volumes:
       - pokemondata:/var/lib/mysql
       - pokemondata:/etc/mysql/conf.d
+
+  rabbit-MQ:
+    container_name: rabbit-MQ
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - spring-net
+    restart: "no"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
 
 networks:
   spring-net:

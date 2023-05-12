@@ -1,7 +1,8 @@
-package com.teun.pokemonservice.Controller;
+package com.teun.pokemonservice.controller;
 
-import com.teun.pokemonservice.Model.UserPokemon;
-import com.teun.pokemonservice.Service.UserPokemonService;
+import com.teun.pokemonservice.models.UserPokemon;
+import com.teun.pokemonservice.rabbitmq.Publisher;
+import com.teun.pokemonservice.service.UserPokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ public class UserPokemonController {
     @Autowired
     UserPokemonService service;
 
+    @Autowired
+    Publisher publisher;
     @GetMapping("/userid/{id}")
     public ResponseEntity<List<UserPokemon>> getAllUserPokemon(@PathVariable(value = "id")Long userId){
         try {
@@ -34,6 +37,7 @@ public class UserPokemonController {
     public ResponseEntity<UserPokemon> createUserPokemon(@RequestBody UserPokemon userPokemon){
         try{
             UserPokemon savedUserPokemon = service.saveUserPokemon(userPokemon);
+            publisher.publishUserPokemon(userPokemon);
             return ResponseEntity.ok().body(savedUserPokemon);
         }
         catch (Exception e){

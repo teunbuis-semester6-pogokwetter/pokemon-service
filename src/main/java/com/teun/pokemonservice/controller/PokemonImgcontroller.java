@@ -1,7 +1,7 @@
-package com.teun.pokemonservice.Controller;
+package com.teun.pokemonservice.controller;
 
-import com.teun.pokemonservice.Model.PokemonImg;
-import com.teun.pokemonservice.Service.PokemonImgService;
+import com.teun.pokemonservice.models.PokemonImg;
+import com.teun.pokemonservice.service.PokemonImgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

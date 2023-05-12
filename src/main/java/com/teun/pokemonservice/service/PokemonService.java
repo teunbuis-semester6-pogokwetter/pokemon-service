@@ -1,7 +1,7 @@
-package com.teun.pokemonservice.Service;
+package com.teun.pokemonservice.service;
 
-import com.teun.pokemonservice.Model.Pokemon;
-import com.teun.pokemonservice.Repo.PokemonRepo;
+import com.teun.pokemonservice.models.Pokemon;
+import com.teun.pokemonservice.repo.PokemonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
