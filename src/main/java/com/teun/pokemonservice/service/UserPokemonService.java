@@ -1,6 +1,6 @@
 package com.teun.pokemonservice.service;
 
-import com.teun.pokemonservice.model.UserPokemon;
+import com.teun.pokemonservice.models.UserPokemon;
 import com.teun.pokemonservice.repo.UserPokemonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

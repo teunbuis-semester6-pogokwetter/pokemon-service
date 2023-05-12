@@ -1,4 +1,4 @@
-package com.teun.pokemonservice.model;
+package com.teun.pokemonservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

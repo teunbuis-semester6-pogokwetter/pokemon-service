@@ -1,6 +1,6 @@
 package com.teun.pokemonservice.controller;
 
-import com.teun.pokemonservice.model.UserPokemon;
+import com.teun.pokemonservice.models.UserPokemon;
 import com.teun.pokemonservice.rabbitmq.Publisher;
 import com.teun.pokemonservice.service.UserPokemonService;
 import org.springframework.beans.factory.annotation.Autowired;

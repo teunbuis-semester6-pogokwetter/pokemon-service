@@ -1,15 +1,13 @@
 package com.teun.pokemonservice.rabbitmq;
 
-import com.teun.pokemonservice.model.UserPokemon;
+import com.teun.pokemonservice.models.UserPokemon;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class Publisher{

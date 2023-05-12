@@ -1,6 +1,6 @@
 package com.teun.pokemonservice.service;
 
-import com.teun.pokemonservice.model.PokemonImg;
+import com.teun.pokemonservice.models.PokemonImg;
 import com.teun.pokemonservice.repo.PokemonImgRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

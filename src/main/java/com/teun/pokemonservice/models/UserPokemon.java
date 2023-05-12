@@ -1,4 +1,4 @@
-package com.teun.pokemonservice.model;
+package com.teun.pokemonservice.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Document(collection = "userpokemons")
-public class UserPokemon {
+public class UserPokemon implements Serializable{
 
     private Long pokemonId;
     private Long userId;

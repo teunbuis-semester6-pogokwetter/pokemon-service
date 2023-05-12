@@ -1,6 +1,6 @@
 package com.teun.pokemonservice.controller;
 
-import com.teun.pokemonservice.model.Pokemon;
+import com.teun.pokemonservice.models.Pokemon;
 import com.teun.pokemonservice.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
