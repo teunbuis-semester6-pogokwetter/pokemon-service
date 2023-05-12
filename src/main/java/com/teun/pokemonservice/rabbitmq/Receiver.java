@@ -12,8 +12,6 @@ import java.util.concurrent.CountDownLatch;
 
 @Component
     public class Receiver{
-    @Autowired
-    UserPokemonService service;
         private CountDownLatch latch = new CountDownLatch(1);
 
         public void receiveMessage(byte[] message){
@@ -26,11 +24,11 @@ import java.util.concurrent.CountDownLatch;
                     userPokemon = in.readObject();
                 }
                 catch (Exception exception){
-                    System.out.println(exception);
+                    System.out.println("Error:" + exception);
                 }
             }
             catch (IOException e){
-                System.out.println(e);
+                System.out.println("Error:" + e);
             }
             System.out.println("Recieved:"+ userPokemon );
             latch.countDown();
