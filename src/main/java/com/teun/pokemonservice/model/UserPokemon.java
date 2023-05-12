@@ -1,4 +1,4 @@
-package com.teun.pokemonservice.Model;
+package com.teun.pokemonservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor

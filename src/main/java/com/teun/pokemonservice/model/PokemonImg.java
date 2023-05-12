@@ -1,4 +1,4 @@
-package com.teun.pokemonservice.Model;
+package com.teun.pokemonservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

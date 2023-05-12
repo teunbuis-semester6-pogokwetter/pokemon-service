@@ -1,11 +1,9 @@
-package com.teun.pokemonservice.Model;
+package com.teun.pokemonservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor

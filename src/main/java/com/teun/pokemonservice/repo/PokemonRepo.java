@@ -1,6 +1,6 @@
-package com.teun.pokemonservice.Repo;
+package com.teun.pokemonservice.repo;
 
-import com.teun.pokemonservice.Model.Pokemon;
+import com.teun.pokemonservice.model.Pokemon;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
