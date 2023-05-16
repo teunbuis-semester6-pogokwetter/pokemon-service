@@ -1,5 +1,6 @@
 package com.teun.pokemonservice.rabbitmq;
 
+import com.teun.pokemonservice.dto.UserPokemonDTO;
 import com.teun.pokemonservice.models.UserPokemon;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,13 @@ public class Publisher{
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void publishUserPokemon(UserPokemon userPokemon){
+    public void publishUserPokemon(UserPokemonDTO userPokemonDTO){
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream out;
         byte[] userPokemonBytes = null;
         try{
             out = new ObjectOutputStream(bos);
-            out.writeObject(userPokemon);
+            out.writeObject(userPokemonDTO);
             out.flush();
             userPokemonBytes = bos.toByteArray();
         }
@@ -32,7 +33,7 @@ public class Publisher{
         try{
             if(userPokemonBytes != null){
                 rabbitTemplate.convertAndSend(MQConfig.EXCHANGENAME, MQConfig.ROUTINGKEY, userPokemonBytes);
-                System.out.println("Send userPokemon to Queue ✨" + userPokemon);
+                System.out.println("Send userPokemon to Queue ✨" + userPokemonDTO);
             }
             else{
                 throw new Exception("Something went wrong with reading the object");

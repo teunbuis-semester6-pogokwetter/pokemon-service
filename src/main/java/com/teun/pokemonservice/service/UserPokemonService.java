@@ -1,7 +1,9 @@
 package com.teun.pokemonservice.service;
 
+import com.teun.pokemonservice.dto.UserPokemonDTO;
 import com.teun.pokemonservice.models.UserPokemon;
 import com.teun.pokemonservice.repo.UserPokemonRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,18 @@ public class UserPokemonService {
     @Autowired
     UserPokemonRepo repo;
 
-    public List<UserPokemon> findAllByUserId(Long userId){
+    @Autowired
+    ModelMapper modelMapper;
+
+    public List<UserPokemonDTO> findAllByUserId(Long userId){
         List<UserPokemon> found = repo.findByUserId(userId);
-        return found;
+        List<UserPokemonDTO> foundDTOs = modelMapper.map(found, List.class);
+        return foundDTOs;
     }
-    public UserPokemon saveUserPokemon(UserPokemon userPokemon){
-        UserPokemon savedUserPokemon = repo.save(userPokemon);
-        return savedUserPokemon;
+    public UserPokemonDTO saveUserPokemon(UserPokemonDTO userPokemonDTO){
+        UserPokemon toSave = modelMapper.map(userPokemonDTO, UserPokemon.class);
+        UserPokemon savedUserPokemon = repo.save(toSave);
+        UserPokemonDTO savedPokemonDTO = modelMapper.map(savedUserPokemon, UserPokemonDTO.class);
+        return savedPokemonDTO;
     }
 }

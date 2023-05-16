@@ -1,17 +1,17 @@
-package com.teun.pokemonservice.models;
+package com.teun.pokemonservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Document(collection = "userpokemons")
-public class UserPokemon{
+public class UserPokemonDTO implements Serializable {
 
     private Long pokemonId;
     private Long userId;
