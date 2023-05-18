@@ -24,7 +24,7 @@ public class UserPokemonController {
     public ResponseEntity<List<UserPokemonDTO>> getAllUserPokemon(@PathVariable(value = "id")Long userId){
         try {
             List<UserPokemonDTO> userPokemonDTOs = service.findAllByUserId(userId);
-            if(userPokemonDTOs != null && userPokemonDTOs.size() != 0){
+            if(userPokemonDTOs != null && userPokemonDTOs.isEmpty() == false){
 
                 return ResponseEntity.ok().body(userPokemonDTOs);
             }
@@ -47,17 +47,4 @@ public class UserPokemonController {
             return ResponseEntity.badRequest().build();
         }
     }
-//    @PostMapping("/dto")
-//    public ResponseEntity<UserPokemonDTO> createUserPokemonByDTO(@RequestBody UserPokemonDTO userPokemonDTO){
-//        try{
-//            UserPokemon toSave = modelMapper.map(userPokemonDTO, UserPokemon.class);
-//            UserPokemon savedUserPokemon = service.saveUserPokemon(toSave);
-//            publisher.publishUserPokemon(toSave);
-//            UserPokemonDTO savedPokemonDTO = modelMapper.map(savedUserPokemon, UserPokemonDTO.class);
-//            return ResponseEntity.ok().body(savedPokemonDTO);
-//        }
-//        catch (Exception e){
-//            return ResponseEntity.badRequest().build();
-//        }
-//    }
 }

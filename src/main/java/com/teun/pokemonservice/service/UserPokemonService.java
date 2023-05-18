@@ -20,13 +20,11 @@ public class UserPokemonService {
 
     public List<UserPokemonDTO> findAllByUserId(Long userId){
         List<UserPokemon> found = repo.findByUserId(userId);
-        List<UserPokemonDTO> foundDTOs = modelMapper.map(found, List.class);
-        return foundDTOs;
+        return modelMapper.map(found, List.class);
     }
     public UserPokemonDTO saveUserPokemon(UserPokemonDTO userPokemonDTO){
         UserPokemon toSave = modelMapper.map(userPokemonDTO, UserPokemon.class);
         UserPokemon savedUserPokemon = repo.save(toSave);
-        UserPokemonDTO savedPokemonDTO = modelMapper.map(savedUserPokemon, UserPokemonDTO.class);
-        return savedPokemonDTO;
+        return modelMapper.map(savedUserPokemon, UserPokemonDTO.class);
     }
 }

@@ -1,7 +1,7 @@
 package com.teun.pokemonservice.rabbitmq;
 
-import com.teun.pokemonservice.service.UserPokemonService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
@@ -14,23 +14,25 @@ import java.util.concurrent.CountDownLatch;
     public class Receiver{
         private CountDownLatch latch = new CountDownLatch(1);
 
+        private Logger logger = LoggerFactory.getLogger(Receiver.class);
+
         public void receiveMessage(byte[] message){
             ByteArrayInputStream bis = new ByteArrayInputStream(message);
-            ObjectInput in;
+            ObjectInput in = null;
             Object userPokemon = null;
             try{
                 in = new ObjectInputStream(bis);
-                try{
-                    userPokemon = in.readObject();
-                }
-                catch (Exception exception){
-                    System.out.println("Error:" + exception);
-                }
             }
             catch (IOException e){
-                System.out.println("Error:" + e);
+                logger.error("Error:" + e);
             }
-            System.out.println("Recieved:"+ userPokemon );
+            try{
+                userPokemon = in.readObject();
+            }
+            catch (Exception exception){
+                logger.error("Error:" + exception);
+            }
+            logger.info("Recieved:"+ userPokemon + " [🌠]");
             latch.countDown();
         }
 
