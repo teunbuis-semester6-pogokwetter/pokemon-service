@@ -2,25 +2,32 @@ version: '3.8'
 services:
   pokemon-service:
     container_name: pokemon-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
     networks:
       - spring-net
     restart: "no"
     depends_on:
-      - pokemon-mysql
-    image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
+      - pokemonimg-mysql
+      - rabbit-MQ
+      - redis
     ports:
       - "8080:8080"
 
-  pokemon-mysql:
-    container_name: pokemon-mysql
+#    image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
+
+  pokemonimg-mysql:
+    container_name: pokemonimg-mysql
     image: mysql:latest
     ports:
-      - "306:3306"
+      - "3307:3307"
     networks:
       - spring-net
     environment:
       - MYSQL_ROOT_PASSWORD=Teun
-      - MYSQL_DATABASE=pokemon
+      - MYSQL_DATABASE=pokemonimg
+      - MYSQL_TCP_PORT=3307
     volumes:
       - pokemondata:/var/lib/mysql
       - pokemondata:/etc/mysql/conf.d
@@ -56,6 +63,7 @@ services:
       - "8001:8001"
     networks:
       - spring-net
+
 networks:
   spring-net:
     name: spring-net

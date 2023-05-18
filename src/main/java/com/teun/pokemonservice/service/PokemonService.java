@@ -18,18 +18,15 @@ public class PokemonService {
     Logger logger = LoggerFactory.getLogger(PokemonService.class);
     @Cacheable(value = "pokemoncache", key = "#dexNumber")
     public Pokemon findPokemonByDexNumber(long dexNumber){
-        Pokemon pokemon = findByPokemonDexNumberFromDatabase(dexNumber);
-        return pokemon;
+        return findByPokemonDexNumberFromDatabase(dexNumber);
     }
     @Cacheable(value = "pokemoncache", key = "#name")
     public Pokemon findPokemonByName(String name){
-        Pokemon found = findByNameFromDataBase(name);
-        return found;
+        return findByNameFromDataBase(name);
     }
     @Cacheable(value = "pokemoncache")
     public List<Pokemon> findAllPokemon(){
-        List<Pokemon> found = findAllFromDataBase();
-        return found;
+        return findAllFromDataBase();
     }
     private List<Pokemon> findAllFromDataBase(){
         logger.info("[🌟] Retreived pokemon from database [🌟]");

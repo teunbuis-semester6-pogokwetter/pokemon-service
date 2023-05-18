@@ -57,7 +57,7 @@ public class UserPokemonController {
     @PostMapping()
     public ResponseEntity<UserPokemonDTO> createUserPokemon(@RequestBody UserPokemonDTO userPokemonDTO){
         try{
-            UserPokemonDTO savedUserPokemonDTO = service.saveUserPokemon(userPokemonDTO);
+            UserPokemonDTO savedUserPokemonDTO = service.saveUserPokemon(userPokemonDTO, userPokemonDTO.getUserId());
             publisher.publishUserPokemonDTO(savedUserPokemonDTO);
             return ResponseEntity.ok().body(savedUserPokemonDTO);
         }
