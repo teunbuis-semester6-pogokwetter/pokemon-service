@@ -2,9 +2,10 @@ version: '3.8'
 services:
   pokemon-service:
     container_name: pokemon-service
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
     networks:
       - spring-net
     restart: "no"
@@ -15,7 +16,6 @@ services:
     ports:
       - "8080:8080"
 
-#    image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
 
   pokemonimg-mysql:
     container_name: pokemonimg-mysql
