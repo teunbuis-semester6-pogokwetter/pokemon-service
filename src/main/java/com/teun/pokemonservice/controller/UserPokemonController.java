@@ -1,12 +1,10 @@
 package com.teun.pokemonservice.controller;
 
-import com.teun.pokemonservice.dto.PokemonDTO;
 import com.teun.pokemonservice.dto.UserPokemonDTO;
-import com.teun.pokemonservice.models.Pokemon;
-import com.teun.pokemonservice.models.UserPokemon;
 import com.teun.pokemonservice.rabbitmq.Publisher;
 import com.teun.pokemonservice.service.UserPokemonService;
-import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +18,10 @@ public class UserPokemonController {
     UserPokemonService service;
     @Autowired
     Publisher publisher;
+
+    Logger logger = LoggerFactory.getLogger(UserPokemonController.class);
     @GetMapping("/userid/{id}")
-    public ResponseEntity<List<UserPokemonDTO>> getAllUserPokemon(@PathVariable(value = "id")Long userId){
+    public ResponseEntity<List<UserPokemonDTO>> getUserPokemonByUserId(@PathVariable(value = "id")Long userId){
         try {
             List<UserPokemonDTO> userPokemonDTOs = service.findAllByUserId(userId);
             if(userPokemonDTOs != null && userPokemonDTOs.isEmpty() == false){
@@ -33,6 +33,24 @@ public class UserPokemonController {
             }
         }
         catch (Exception e){
+            logger.error("Error: " + e);
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<UserPokemonDTO>> getAllUserPokemon(){
+        try {
+            List<UserPokemonDTO> userPokemonDTOs = service.findAll();
+            if(userPokemonDTOs != null && userPokemonDTOs.isEmpty() == false){
+
+                return ResponseEntity.ok().body(userPokemonDTOs);
+            }
+            else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        catch (Exception e){
+            logger.error("Error: " + e);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -40,10 +58,11 @@ public class UserPokemonController {
     public ResponseEntity<UserPokemonDTO> createUserPokemon(@RequestBody UserPokemonDTO userPokemonDTO){
         try{
             UserPokemonDTO savedUserPokemonDTO = service.saveUserPokemon(userPokemonDTO);
-            publisher.publishUserPokemon(savedUserPokemonDTO);
+            publisher.publishUserPokemonDTO(savedUserPokemonDTO);
             return ResponseEntity.ok().body(savedUserPokemonDTO);
         }
         catch (Exception e){
+            logger.error("Error: " + e);
             return ResponseEntity.badRequest().build();
         }
     }

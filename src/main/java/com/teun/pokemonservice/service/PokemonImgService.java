@@ -18,6 +18,7 @@ public class PokemonImgService {
     PokemonImgRepo repo;
 
     Logger logger = LoggerFactory.getLogger(PokemonImgService.class);
+
     public List<PokemonImg> findAllPokemonImgs() {
         return repo.findAll();
     }
@@ -33,7 +34,6 @@ public class PokemonImgService {
     }
 
     public int savePokemonImg(PokemonImg pokemonImg) {
-
 
         return repo.save(pokemonImg).getId();
     }
