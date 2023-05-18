@@ -38,6 +38,24 @@ services:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
 
+  redis:
+    container_name: pokemon-redis
+    image: redis:alpine
+    command: redis-server --requirepass Teun
+    networks:
+      - spring-net
+    ports:
+      - "6379:6379"
+    volumes:
+      - pokemonredis:/data
+
+  redis-insight:
+    container_name: redis-insight
+    image: redislabs/redisinsight:latest
+    ports:
+      - "8001:8001"
+    networks:
+      - spring-net
 networks:
   spring-net:
     name: spring-net
@@ -45,3 +63,4 @@ networks:
 
 volumes:
   pokemondata:
+  pokemonredis:

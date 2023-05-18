@@ -2,6 +2,8 @@ package com.teun.pokemonservice.service;
 
 import com.teun.pokemonservice.models.PokemonImg;
 import com.teun.pokemonservice.repo.PokemonImgRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +16,8 @@ public class PokemonImgService {
 
     @Autowired
     PokemonImgRepo repo;
+
+    Logger logger = LoggerFactory.getLogger(PokemonImgService.class);
 
     public List<PokemonImg> findAllPokemonImgs() {
         return repo.findAll();
@@ -31,7 +35,6 @@ public class PokemonImgService {
 
     public int savePokemonImg(PokemonImg pokemonImg) {
 
-
         return repo.save(pokemonImg).getId();
     }
     public void savePokemonImgs(MultipartFile[] images){
@@ -48,8 +51,9 @@ public class PokemonImgService {
         byte[] imageToSave = new byte[0];
         try {
             imageToSave = image.getBytes();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        }
+        catch (IOException e) {
+            logger.error("Error: " + e);
         }
         return imageToSave;
     }
@@ -61,9 +65,9 @@ public class PokemonImgService {
                 byte[] imageToSave = convertToByteArray(image);
                 mapped.put(image.getOriginalFilename(), imageToSave);
             });
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        }
+        catch (Exception e) {
+            logger.error("Error: " + e);
         }
         List<Map.Entry<String, byte[]>> list = new LinkedList<>(mapped.entrySet());
         return list;
@@ -79,6 +83,7 @@ public class PokemonImgService {
             pokemonId = Integer.parseInt(sb.toString());
         }
         catch (NumberFormatException e){
+            logger.error("Error" + e);
             pokemonId = 99999;
         }
         return pokemonId;

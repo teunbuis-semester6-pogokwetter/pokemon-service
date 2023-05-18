@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Document(collection = "userpokemons")
-public class UserPokemon{
+public class UserPokemon implements Serializable {
 
     private Long pokemonId;
     private Long userId;

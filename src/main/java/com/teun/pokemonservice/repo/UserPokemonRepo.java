@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface UserPokemonRepo extends MongoRepository<UserPokemon, String> {
-
     List<UserPokemon> findByUserId(Long userId);
+    List<UserPokemon> findByNickName(String nickName);
 }

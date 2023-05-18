@@ -2,6 +2,8 @@ package com.teun.pokemonservice.controller;
 
 import com.teun.pokemonservice.models.Pokemon;
 import com.teun.pokemonservice.service.PokemonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ public class PokemonController {
     @Autowired
     PokemonService service;
 
+    Logger logger = LoggerFactory.getLogger(PokemonController.class);
     @GetMapping("/dex/{dexNumber}")
     public ResponseEntity<Pokemon> getPokemonById(@PathVariable(value = "dexNumber")Long dexNumber){
         try{
@@ -30,6 +33,7 @@ public class PokemonController {
             }
         }
         catch (Exception e){
+            logger.error("Error: " + e);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -46,6 +50,7 @@ public class PokemonController {
             }
         }
         catch (Exception e){
+            logger.error("Error: " + e);
             return ResponseEntity.badRequest().build();
         }
     }

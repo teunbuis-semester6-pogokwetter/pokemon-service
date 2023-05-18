@@ -2,6 +2,8 @@ package com.teun.pokemonservice.controller;
 
 import com.teun.pokemonservice.models.PokemonImg;
 import com.teun.pokemonservice.service.PokemonImgService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ public class PokemonImgcontroller {
     @Autowired
     PokemonImgService service;
 
+    Logger logger = LoggerFactory.getLogger(PokemonImgcontroller.class);
     @GetMapping
     public ResponseEntity<List<PokemonImg>> getAllPkmnImg(){
         try{
@@ -46,20 +49,7 @@ public class PokemonImgcontroller {
             }
         }
         catch (Exception e){
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity<Integer> uploadPkmnImg(@RequestParam MultipartFile multipartImage){
-        try{
-            PokemonImg pokemonImg =new PokemonImg();
-            pokemonImg.setPokemonid(1);
-            pokemonImg.setPokemonpicture(multipartImage.getBytes());
-            int id = service.savePokemonImg(pokemonImg);
-            return ResponseEntity.ok().body(id);
-        }
-        catch (Exception e){
+            logger.error("Error: " + e);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -70,6 +60,7 @@ public class PokemonImgcontroller {
             return ResponseEntity.ok().body("Success");
         }
         catch (Exception e){
+            logger.error("Error: " + e);
             return ResponseEntity.badRequest().body(e.toString());
         }
     }
