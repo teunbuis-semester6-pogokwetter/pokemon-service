@@ -15,6 +15,13 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  MONGODB_DATABASE_NAME: ${{ secrets.MONGODB_DATABASE_NAME }}
+  MONGODB_DATABASE_URI: ${{ secrets.MONGODB_DATABASE_URI }}
+  MYSQL_DATABASE_PASSWORD: ${{ secrets.MYSQL_DATABASE_PASSWORD }}
+  MYSQL_DATABASE_USER: ${{ secrets.MYSQL_DATABASE_USER}}
+  RABITMQ_PASSWORD: ${{ secrets.RABITMQ_PASSWORD}}
+  RABITMQ_USER_NAME: ${{ secrets.RABITMQ_USER_NAME}}
+  REDIS_PASSORD: ${{ secrets.REDIS_PASSWORD}}
   
 jobs:
   build:
@@ -31,14 +38,6 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
     - name: Build with Gradle
-      env:
-        MONGODB_DATABASE_NAME: ${{ secrets.MONGODB_DATABASE_NAME }}
-        MONGODB_DATABASE_URI: ${{ secrets.MONGODB_DATABASE_URI }}
-        MYSQL_DATABASE_PASSWORD: ${{ secrets.MYSQL_DATABASE_PASSWORD }}
-        MYSQL_DATABASE_USER: ${{ secrets.MYSQL_DATABASE_USER}}
-        RABITMQ_PASSWORD: ${{ secrets.RABITMQ_PASSWORD}}
-        RABITMQ_USER_NAME: ${{ secrets.RABITMQ_USER_NAME}}
-        REDIS_PASSORD: ${{ secrets.REDIS_PASSWORD}}
       run: ./gradlew build -x test
       
     - name: Login To Registry

@@ -3,6 +3,7 @@ services:
   pokemon-service:
     container_name: pokemon-service
     image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
+    pull_policy: "always"
 #    build:
 #      context: ./
 #      dockerfile: Dockerfile
