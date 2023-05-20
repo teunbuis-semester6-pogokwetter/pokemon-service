@@ -1,20 +1,19 @@
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
   annotations:
     kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f docker-compose.yml
     kompose.version: 1.28.0 (c4137012e)
   creationTimestamp: null
   labels:
-    io.kompose.network/spring-net: "true"
     io.kompose.service: pokemon-service
   name: pokemon-service
 spec:
-  containers:
-    - image: teunbuis/pogokwetter:pokemon-service
-      name: pokemon-service
-      ports:
-        - containerPort: 8080
-      resources: {}
-  restartPolicy: OnFailure
-status: {}
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: pokemon-service
+status:
+  loadBalancer: {}

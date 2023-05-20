@@ -7,14 +7,20 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.network/spring-net: "true"
-    io.kompose.service: pokemon-service
-  name: pokemon-service
+    io.kompose.service: rabbit-mq
+  name: rabbit-mq
 spec:
   containers:
-    - image: teunbuis/pogokwetter:pokemon-service
-      name: pokemon-service
+    - env:
+        - name: RABBITMQ_DEFAULT_PASS
+          value: password
+        - name: RABBITMQ_DEFAULT_USER
+          value: user
+      image: rabbitmq:3-management
+      name: rabbit-mq
       ports:
-        - containerPort: 8080
+        - containerPort: 15672
+        - containerPort: 5672
       resources: {}
-  restartPolicy: OnFailure
+  restartPolicy: Never
 status: {}
