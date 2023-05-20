@@ -2,7 +2,8 @@ version: '3.8'
 services:
   pokemon-service:
     container_name: pokemon-service
-    image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
+#   image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
+    image: teunbuis/pogokwetter:pokemon-service
     pull_policy: "always"
 #    build:
 #      context: ./
@@ -12,8 +13,8 @@ services:
     restart: "no"
     depends_on:
       - pokemonimg-mysql
-      - rabbit-MQ
-      - redis
+      - rabbit-mq
+      - pokemon-redis
     ports:
       - "8080:8080"
 
@@ -33,8 +34,8 @@ services:
       - pokemondata:/var/lib/mysql
       - pokemondata:/etc/mysql/conf.d
 
-  rabbit-MQ:
-    container_name: rabbit-MQ
+  rabbit-mq:
+    container_name: rabbit-mq
     image: rabbitmq:3-management
     ports:
       - "15672:15672"
@@ -46,7 +47,7 @@ services:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
 
-  redis:
+  pokemon-redis:
     container_name: pokemon-redis
     image: redis:alpine
     command: redis-server --requirepass Teun
