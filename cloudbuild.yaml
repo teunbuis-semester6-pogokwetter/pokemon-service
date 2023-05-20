@@ -1,6 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/gradle:latest'
-    args: ['clean', 'bootjar']
+    args: ['clean', 'build']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build',
