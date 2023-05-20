@@ -1,4 +1,14 @@
 steps:
+  - name: 'gcr.io/cloud-builders/java'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        apt-get update && apt-get install -y wget unzip
+        wget -q -O gradle.zip https://services.gradle.org/distributions/gradle-8.1.1-bin.zip
+        unzip -qq gradle.zip
+        export PATH=$PATH:/workspace/gradle-7.3/bin
+        gradle --version
   - name: 'gcr.io/cloud-builders/gradle:latest'
     args: ['clean', 'build']
 
