@@ -1,0 +1,26 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_DATABASE_URI}
+      database: ${MONGODB_DATABASE_NAME}
+      auto-index-creation: true
+    redis:
+      host: localhost
+      port: 6379
+      password: ${REDIS_PASSWORD}
+
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: ${MYSQL_DATABASE_URL}
+    username: ${MYSQL_DATABASE_PASSWORD}
+    password: ${MYSQL_DATABASE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${RABITMQ_USER_NAME}
+    password: ${RABITMQ_PASSWORD}
