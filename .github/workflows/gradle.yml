@@ -39,13 +39,13 @@ jobs:
       run: chmod +x ./gradlew
     - name: Modify application.yml
       run: |
-        sed -i 's|MONGODB_DATABASE_NAME|'"${{ secrets.MONGODB_DATABASE_NAME }}"'|g' ./src/main/resources/application-prod.yml
-        sed -i 's|MONGODB_DATABASE_URI|'"${{ secrets.MONGODB_DATABASE_URI }}"'|g' ./src/main/resources/application-prod.yml
-        sed -i 's|MYSQL_DATABASE_PASSWORD|'"${{ secrets.MYSQL_DATABASE_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
-        sed -i 's|MYSQL_DATABASE_USER|'"${{ secrets.MYSQL_DATABASE_USER }}"'|g' ./src/main/resources/application-prod.yml
-        sed -i 's|RABITMQ_PASSWORD|'"${{ secrets.RABITMQ_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
-        sed -i 's|RABITMQ_USER_NAME|'"${{ secrets.RABITMQ_USER_NAME }}"'|g' ./src/main/resources/application-prod.yml
-        sed -i 's|REDIS_PASSWORD|'"${{ secrets.REDIS_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
+        sed -i 's|${MONGODB_DATABASE_NAME}|'"${{ secrets.MONGODB_DATABASE_NAME }}"'|g' ./src/main/resources/application-prod.yml
+        sed -i 's|${MONGODB_DATABASE_URI}|'"${{ secrets.MONGODB_DATABASE_URI }}"'|g' ./src/main/resources/application-prod.yml
+        sed -i 's|${MYSQL_DATABASE_PASSWORD}|'"${{ secrets.MYSQL_DATABASE_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
+        sed -i 's|${MYSQL_DATABASE_USER}|'"${{ secrets.MYSQL_DATABASE_USER }}"'|g' ./src/main/resources/application-prod.yml
+        sed -i 's|${RABITMQ_PASSWORD}|'"${{ secrets.RABITMQ_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
+        sed -i 's|${RABITMQ_USER_NAME}|'"${{ secrets.RABITMQ_USER_NAME }}"'|g' ./src/main/resources/application-prod.yml
+        sed -i 's|${REDIS_PASSWORD}|'"${{ secrets.REDIS_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
     - name: Build with Gradle
       run: ./gradlew build -x test
       
