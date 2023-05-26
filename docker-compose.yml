@@ -2,7 +2,7 @@ version: '3.8'
 services:
   pokemon-service:
     container_name: pokemon-service
-#   image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
+#    image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-service:latest
     image: teunbuis/pogokwetter:pokemon-service
     pull_policy: "always"
 #    build:
@@ -57,6 +57,14 @@ services:
       - "6379:6379"
     volumes:
       - pokemonredis:/data
+
+  pokemon-gateway:
+    container_name: pokemon-gateway
+    image: ghcr.io/teunbuis-semester6-pogokwetter/pokemon-gateway:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-net
 
   redis-insight:
     container_name: redis-insight

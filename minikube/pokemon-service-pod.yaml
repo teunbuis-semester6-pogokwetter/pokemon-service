@@ -14,7 +14,7 @@ spec:
     - image: teunbuis/pogokwetter:pokemon-service
       name: pokemon-service
       ports:
-        - containerPort: 8080
+        - containerPort: 8081
       resources: {}
   restartPolicy: OnFailure
 status: {}

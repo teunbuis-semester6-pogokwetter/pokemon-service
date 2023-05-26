@@ -37,7 +37,7 @@ jobs:
         distribution: 'temurin'
     - name: Make gradlew executable
       run: chmod +x ./gradlew
-    - name: Modify application.yml and Build
+    - name: Modify application.yml
       run: |
         sed -i 's|${MONGODB_DATABASE_NAME}|'"${{ secrets.MONGODB_DATABASE_NAME }}"'|g' ./src/main/resources/application-prod.yml
         sed -i 's|${MONGODB_DATABASE_URI}|'"${{ secrets.MONGODB_DATABASE_URI }}"'|g' ./src/main/resources/application-prod.yml
@@ -46,7 +46,8 @@ jobs:
         sed -i 's|${RABITMQ_PASSWORD}|'"${{ secrets.RABITMQ_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
         sed -i 's|${RABITMQ_USER_NAME}|'"${{ secrets.RABITMQ_USER_NAME }}"'|g' ./src/main/resources/application-prod.yml
         sed -i 's|${REDIS_PASSWORD}|'"${{ secrets.REDIS_PASSWORD }}"'|g' ./src/main/resources/application-prod.yml
-        ./gradlew build -x test
+    - name: Build with Gradle
+      run: ./gradlew build -x test
       
     - name: Login To Registry
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
