@@ -38,7 +38,11 @@ sonarqube {
 		property "sonar.projectKey", "teunbuis-semester6-pogokwetter_pokemon-service"
 		property "sonar.organization", "teunbuis-semester6-pogokwetter"
 		property "sonar.host.url", "https://sonarcloud.io"
+		property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
 	}
+}
+jacoco{
+	toolVersion = '0.8.7'
 }
 
 tasks.named('test') {
@@ -47,17 +51,11 @@ tasks.named('test') {
 
 test {
 	useJUnitPlatform()
-	finalizedBy jacocoTestReport
-}
-jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
-	reports {
-		xml.required = false
-		csv.required = false
-		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	jacoco {
+		enabled = true
+		destinationFile = file("$buildDir/jacoco/test.exec")
 	}
 }
-test.finalizedBy jacocoTestReport
 
 
 jacocoTestCoverageVerification {
