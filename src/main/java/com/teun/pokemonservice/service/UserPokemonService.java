@@ -18,6 +18,7 @@ import java.util.List;
 @Service
 public class UserPokemonService {
 
+    private static final String FROM_DATABASE = "[ 🌟 ] Retreived pokemon from database [ 🌟 ]";
     @Autowired
     UserPokemonRepo repo;
     @Autowired
@@ -46,19 +47,19 @@ public class UserPokemonService {
 
     private List<UserPokemonDTO> findAllByUserIdFromDatabase(long userId){
         List<UserPokemon> found = repo.findByUserId(userId);
-        logger.info("[🌟] Retrieved userpokemon from database [🌟]");
+        logger.info(FROM_DATABASE);
         return modelMapper.map(found, List.class);
     }
 
     private UserPokemonDTO saveUserPokemonToDatabase(UserPokemonDTO userPokemonDTO){
         UserPokemon toSave = modelMapper.map(userPokemonDTO, UserPokemon.class);
         UserPokemon savedUserPokemon = repo.save(toSave);
-        logger.info("[🌟] Saved userpokemon to database [🌟]");
+        logger.info("[ 🌟 ] Saved userpokemon to database [ 🌟 ]");
         return modelMapper.map(savedUserPokemon, UserPokemonDTO.class);
     }
     private List<UserPokemonDTO>findAllFromDataBase(){
         List<UserPokemon> found = repo.findAll();
-        logger.info("[🌟] Retreived userpokemon from database [🌟]");
+        logger.info(FROM_DATABASE);
         return modelMapper.map(found, List.class);
     }
 
@@ -67,7 +68,7 @@ public class UserPokemonService {
         if(cache != null){
             cache.clear();
             cache.evict(cacheKey);
-            logger.info("[🧹] Cache Cleared for key: " + cacheKey + " [🧹]");
+            logger.info("[ 🧹 ] Cache Cleared for key: " + cacheKey + " [ 🧹 ]");
         }
     }
 }

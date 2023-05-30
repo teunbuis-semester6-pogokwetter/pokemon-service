@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 public class PokemonService {
 
+    private static final String FROM_DATABASE = "[ 🌟 ] Retrieved pokemon from database [ 🌟 ]";
     @Autowired
     PokemonRepo repo;
     Logger logger = LoggerFactory.getLogger(PokemonService.class);
@@ -29,15 +30,15 @@ public class PokemonService {
         return findAllFromDataBase();
     }
     private List<Pokemon> findAllFromDataBase(){
-        logger.info("[🌟] Retreived pokemon from database [🌟]");
+        logger.info(FROM_DATABASE);
         return repo.findAll();
     }
     private Pokemon findByNameFromDataBase(String name){
-        logger.info("[🌟] Retreived pokemon from database [🌟]");
+        logger.info(FROM_DATABASE);
         return repo.findByName(name).orElse(null);
     }
     private Pokemon findByPokemonDexNumberFromDatabase(long dexNumber){
-        logger.info("[🌟] Retreived pokemon from database [🌟]");
+        logger.info(FROM_DATABASE);
         return repo.findByDexNumber(dexNumber).orElse(null);
     }
 }

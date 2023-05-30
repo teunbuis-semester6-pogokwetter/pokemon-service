@@ -20,7 +20,7 @@ import java.util.concurrent.CountDownLatch;
         private Logger logger = LoggerFactory.getLogger(Receiver.class);
 
         public void receiveMessage(UserPokemonDTO userPokemonDTO){
-            logger.info("[🌠] " + "Recieved from queue:"+ userPokemonDTO + " [🌠]");
+            logger.info("[ 🌠 ] " + "Recieved from queue:"+ userPokemonDTO + " [ 🌠 ]");
             userPokemonService.updateCache(userPokemonDTO.getUserId().toString());
             latch.countDown();
         }

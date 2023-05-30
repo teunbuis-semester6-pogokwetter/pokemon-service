@@ -18,7 +18,7 @@ public class Publisher{
     public void publishUserPokemonDTO (UserPokemonDTO userPokemonDTO){
         try{
             rabbitTemplate.convertAndSend(MQConfig.EXCHANGENAME, MQConfig.ROUTINGKEY, userPokemonDTO);
-            logger.info("[✨] " + "Send userPokemon to Queue: " + userPokemonDTO + " [✨]");
+            logger.info("[ ✨ ] " + "Send userPokemon to Queue: " + userPokemonDTO + " [ ✨ ]");
         }
         catch (Exception e){
             logger.error("Error:" + e);
