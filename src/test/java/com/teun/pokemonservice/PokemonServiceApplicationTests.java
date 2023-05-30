@@ -8,6 +8,7 @@ class PokemonServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
