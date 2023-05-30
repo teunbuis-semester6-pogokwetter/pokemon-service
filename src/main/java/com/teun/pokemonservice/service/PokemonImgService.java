@@ -13,7 +13,7 @@ import java.util.*;
 
 @Service
 public class PokemonImgService {
-
+    private static final String ERROR = "Error: ";
     @Autowired
     PokemonImgRepo repo;
 
@@ -53,7 +53,7 @@ public class PokemonImgService {
             imageToSave = image.getBytes();
         }
         catch (IOException e) {
-            logger.error("Error: " + e);
+            logger.error(ERROR + e);
         }
         return imageToSave;
     }
@@ -67,7 +67,7 @@ public class PokemonImgService {
             });
         }
         catch (Exception e) {
-            logger.error("Error: " + e);
+            logger.error(ERROR + e);
         }
         List<Map.Entry<String, byte[]>> list = new LinkedList<>(mapped.entrySet());
         return list;
@@ -83,7 +83,7 @@ public class PokemonImgService {
             pokemonId = Integer.parseInt(sb.toString());
         }
         catch (NumberFormatException e){
-            logger.error("Error" + e);
+            logger.error(ERROR + e);
             pokemonId = 99999;
         }
         return pokemonId;
