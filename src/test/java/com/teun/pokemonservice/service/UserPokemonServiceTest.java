@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class UserPokemonServiceTest {
+    //For testing
     @Mock
     private UserPokemonRepo repo;
 
