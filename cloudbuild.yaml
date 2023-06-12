@@ -1,12 +1,12 @@
 steps:
-  - name: 'gcr.io/cloud-builders/gradle'
-    args: ['--version', 'wrapper', '--gradle-version', '8.1.1', 'bootJar']
+  - name: 'gcr.io/cloud-builders/gradle:8.1.1-jdk17-alpine'
+    args: ['--version', '--gradle-version', 'bootJar']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build',
             '-t',
-            'gcr.io/graphic-matrix-308512/pokemon-service:latest',
+            'gcr.io/$PROJECT_ID/pokemon-service:$COMMIT_SHA',
             '.' ]
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
-           'gcr.io/graphic-matrix-308512/pokemon-service:latest']
+           'gcr.io/$PROJECT_ID/pokemon-service:$COMMIT_SHA']
