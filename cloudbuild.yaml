@@ -1,6 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/gradle'
-    args: ['--version', 'wrapper', '--gradle-version', '8.1.1', 'bootJar']
+    args: ['--version', 'wrapper', '--gradle-version', '8.1.1', 'build']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build',
