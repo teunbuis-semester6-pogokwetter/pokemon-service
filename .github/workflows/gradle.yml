@@ -58,4 +58,4 @@ jobs:
           ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter/pokemon-service:latest
 
     - name: Publish Docker image
-      run: docker push gcr.io/my-project/my-image:${{ github.sha }}
+      run: docker push ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter:${{ github.sha }}
