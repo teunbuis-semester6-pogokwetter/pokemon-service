@@ -48,10 +48,14 @@ jobs:
         username: ${{github.actor}}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build Pokemon-Service Image
-      working-directory: ./
-      run: docker build -t ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter/pokemon-service:${{ github.sha }} .
+    - name: Build and tag Docker Image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: |
+          ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter/pokemon-service:${{ github.sha }}
+          ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter/pokemon-service:latest
 
-    - name: Push Pokemon-Service Image
-      working-directory: ./
-      run: docker push ${{env.REGISTRY}}/teunbuis-semester6-pogokwetter/pokemon-service:${{ github.sha }}
+    - name: Publish Docker image
+      run: docker push gcr.io/my-project/my-image:${{ github.sha }}
