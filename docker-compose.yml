@@ -34,6 +34,21 @@ services:
       - pokemondata:/var/lib/mysql
       - pokemondata:/etc/mysql/conf.d
 
+  user-mysql:
+    container_name: user-mysql
+    image: mysql:latest
+    ports:
+      - "3308:3308"
+    networks:
+      - spring-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=Teun
+      - MYSQL_DATABASE=user
+      - MYSQL_TCP_PORT=3308
+    volumes:
+      - userdata:/var/lib/mysql
+      - userdata:/etc/mysql/conf.d
+
   rabbit-mq:
     container_name: rabbit-mq
     image: rabbitmq:3-management
@@ -82,3 +97,4 @@ networks:
 volumes:
   pokemondata:
   pokemonredis:
+  userdata:
