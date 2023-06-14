@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pogokwetter
+  labels:
+    name: pogokwetter
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pokemon-service
+  namespace: pogokwetter
+  labels:
+    app: pokemon-service
+    tier: backend
+spec:
+  ports:
+    - port: 8081
+      targetPort: 8081
+  selector:
+    app: pokemon-service
+    tier: backend
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pokemon-service
+  namespace: pogokwetter
+spec:
+  selector:
+    matchLabels:
+      app: pokemon-service
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pokemon-service
+        tier: backend
+    spec:
+      containers:
+        - name: pokemon-service
+          image: docker.io/teunbuis/pogokwetter:pokemon-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pokemonimg-mysql
+  namespace: pogokwetter
+  labels:
+    app: pokemonimng-mysql
+    tier: backend
+spec:
+  selector:
+    app: pokemonimng-mysql
+  ports:
+    - protocol: TCP
+      name: "3307"
+      port: 3307
+      targetPort: 3307
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pokemonimng-mysql
+  namespace: pogokwetter
+spec:
+  selector:
+    matchLabels:
+      app: pokemonimng-mysql
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pokemonimng-mysql
+        tier: backend
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3307
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: Teun
+            - name: MYSQL_TCP_PORT
+              value: "3307"
+            - name: MYSQL_DATABASE
+              value: pokemonimg
