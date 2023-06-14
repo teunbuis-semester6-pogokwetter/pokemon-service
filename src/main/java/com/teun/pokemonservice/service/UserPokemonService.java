@@ -29,18 +29,18 @@ public class UserPokemonService {
 
 
     Logger logger = LoggerFactory.getLogger(UserPokemonService.class);
-    @Cacheable(value = "userpokemoncache", key = "#userId")
+//    @Cacheable(value = "userpokemoncache", key = "#userId")
     public List<UserPokemonDTO> findAllByUserId(Long userId){
         return findAllByUserIdFromDatabase(userId);
     }
 
-    @Cacheable(value = "userpokemoncache")
+//    @Cacheable(value = "userpokemoncache")
     public List<UserPokemonDTO> findAll(){
         logger.info("found userpokemons");
         return findAllFromDataBase();
     }
 
-    @CachePut(value = "userPokemon", key ="#userId")
+//    @CachePut(value = "userPokemon", key ="#userId")
     public UserPokemonDTO saveUserPokemon(UserPokemonDTO userPokemonDTO, long userId){
         return saveUserPokemonToDatabase(userPokemonDTO);
     }
