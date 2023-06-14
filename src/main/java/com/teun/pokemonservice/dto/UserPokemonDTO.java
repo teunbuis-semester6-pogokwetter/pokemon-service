@@ -13,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class UserPokemonDTO implements Serializable {
 
+    private String id;
     private Long pokemonId;
     private Long userId;
 
